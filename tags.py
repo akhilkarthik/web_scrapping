@@ -19,4 +19,21 @@ soup = BeautifulSoup(html_doc, 'html.parser')
 # print(soup.a)
 #print(soup.find_all("a"))
 
-print(soup.get_text()) # for getting all the texts from page
+# print(soup.get_text()) # for getting all the texts from page
+
+# Find the table element, if it exists
+table = soup.find("table")
+
+if table is not None:
+    # Extract data and organize it into a tabular format
+    data = []
+
+    # Extract data from table rows
+    rows = table.find_all("tr")
+
+    for row in rows:
+        cols = row.find_all("td")
+        cols = [col.text.strip() for col in cols]
+        data.append(cols)
+else:
+    print("Table not found on the page")  # here we dont have any tables
